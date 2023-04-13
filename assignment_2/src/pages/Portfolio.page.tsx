@@ -18,13 +18,18 @@ import SearchContextProvider, {
 import { getMutualFundsList } from "../services/apiEndpoints";
 import { MutualFund } from "../types";
 
-import { Box } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 
 const PortfolioPage: FC = () => {
   const [popupOpen, setPopupOpen] = useState(false);
 
-  const { selectedFund, setSelectedFund, setAllFunds, setUnitsOwned } =
-    useContext(PortfolioContext);
+  const {
+    selectedFund,
+    setSelectedFund,
+    setAllFunds,
+    setUnitsOwned,
+    totalUnitsOwned,
+  } = useContext(PortfolioContext);
 
   const [changeSelectedFundUnits, setChangeSelectedFundUnits] =
     useState<Function>(() => (changeType: "increase" | "decrease") => {});
@@ -91,6 +96,9 @@ const PortfolioPage: FC = () => {
           </Popup>
         )}
       </Box>
+      <Typography variant="body2" color="textSecondary" align="center">
+        Total units owned = {totalUnitsOwned}
+      </Typography>
     </>
   );
 };

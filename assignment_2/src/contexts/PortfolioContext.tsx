@@ -9,6 +9,7 @@ interface Portfolio {
   unitsOwned: number[];
   setUnitsOwned: Function;
   changeFundUnits: Function;
+  totalUnitsOwned: number;
 }
 
 export const PortfolioContext = createContext<Portfolio>({
@@ -19,6 +20,7 @@ export const PortfolioContext = createContext<Portfolio>({
   unitsOwned: [],
   setUnitsOwned: () => {},
   changeFundUnits: () => {},
+  totalUnitsOwned: 0,
 });
 
 interface ProtfolioContextProviderProps {
@@ -31,20 +33,26 @@ const PortfolioContextProvider = ({
   const [selectedFund, setSelectedFund] = useState(null);
   const [allFunds, setAllFunds] = useState<MutualFund[]>([]);
   const [unitsOwned, setUnitsOwned] = useState<number[]>([]);
+  const [totalUnitsOwned, setTotalUnitsOwned] = useState(0);
 
   const changeFundUnits = useCallback(
     (fundIndex: number) => (changetype: "increase" | "decrease") => {
-      setUnitsOwned((oldUnits: number[]) => {
-        switch (changetype) {
-          case "increase":
+      switch (changetype) {
+        case "increase":
+          setUnitsOwned((oldUnits: number[]) => {
             ++oldUnits[fundIndex];
-            break;
-          case "decrease":
+            return oldUnits;
+          });
+          setTotalUnitsOwned((oldTotalUnits: number) => ++oldTotalUnits);
+          break;
+        case "decrease":
+          setUnitsOwned((oldUnits: number[]) => {
             --oldUnits[fundIndex];
-            break;
-        }
-        return oldUnits;
-      });
+            return oldUnits;
+          });
+          setTotalUnitsOwned((oldTotalUnits: number) => --oldTotalUnits);
+          break;
+      }
     },
     [unitsOwned]
   );
@@ -59,6 +67,7 @@ const PortfolioContextProvider = ({
         unitsOwned,
         setUnitsOwned,
         changeFundUnits,
+        totalUnitsOwned,
       }}
     >
       {children}

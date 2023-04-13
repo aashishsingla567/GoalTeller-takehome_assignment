@@ -21,9 +21,7 @@ function MutualFundsDataGrid({ onMutualFundClick }: MutualFundsDataGridProps) {
       flex: 2.5,
       renderCell: (params) => {
         const fund = params.row as MutualFund;
-
-        console.log(params.row.id);
-
+        
         return (
           <div
             style={{
