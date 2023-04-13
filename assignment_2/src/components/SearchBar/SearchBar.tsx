@@ -21,6 +21,14 @@ export default function SearchBar() {
   };
 
   return (
-    <TextField label="Search" variant="outlined" onChange={handleInputChange} fullWidth/>
+    <TextField
+      label="Search"
+      variant="outlined"
+      onChange={handleInputChange}
+      fullWidth
+      style={{
+        marginBottom: "1rem",
+      }}
+    />
   );
 }

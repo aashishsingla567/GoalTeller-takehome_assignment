@@ -6,7 +6,7 @@ import Popup from "../components/Popup/Popup";
 import PortfolioList from "../components/PortfolioList/PortfolioList";
 import SearchBar from "../components/SearchBar/SearchBar";
 import SearchResults from "../components/SearchResults/SearchResults";
-import Header from "../components/Header";
+import Header from "./components/Header";
 
 import PortfolioContextProvider, {
   PortfolioContext,
@@ -64,7 +64,13 @@ const PortfolioPage: FC = () => {
   return (
     <>
       <Header />
-      <Box>
+      <Box
+        sx={{
+          padding: "2rem",
+          maxWidth: "1200px",
+          margin: "auto",
+        }}
+      >
         <SearchBar />
         <SearchResults onMutualFundClick={handleMutualFundSelected} />
         <PortfolioList onMutualFundClick={handleMutualFundSelected} />

@@ -6,7 +6,7 @@ import {
   CardHeader,
   Typography,
 } from "@mui/material";
-import { useCallback } from "react";
+import { useCallback, useMemo } from "react";
 import { useQuery } from "react-query";
 import { makeStyles } from "@mui/styles";
 
@@ -25,8 +25,8 @@ interface MutualFundCardProps {
 
 const useStyles = makeStyles({
   card: {
-    maxWidth: 345,
     margin: "auto",
+    paddingBlock: "2rem",
   },
   title: {
     fontSize: 14,
@@ -39,20 +39,30 @@ const useStyles = makeStyles({
 const MutualFundCard = ({ data, changeFundUnits }: MutualFundCardProps) => {
   const classes = useStyles();
 
+  const latestData = useMemo(() => {
+    const latest = data.data.reduce((acc, curr) => {
+      const { accDate, currDate } = {
+        accDate: new Date(acc.date),
+        currDate: new Date(curr.date),
+      };
+      return (accDate > currDate) ? acc : curr;
+    });
+  }, [data]);
+
   return (
     <Card className={classes.card}>
       <CardContent>
+        <Typography variant="h6" component="h2">
+          Scheme Name: {data.meta.scheme_name}
+        </Typography>
+        <Typography className={classes.pos} color="textSecondary">
+          Fund House: {data.meta.fund_house}
+        </Typography>
         <Typography
           className={classes.title}
           color="textSecondary"
           gutterBottom
         >
-          Fund House: {data.meta.fund_house}
-        </Typography>
-        <Typography variant="h5" component="h2">
-          Scheme Name: {data.meta.scheme_name}
-        </Typography>
-        <Typography className={classes.pos} color="textSecondary">
           Scheme Category: {data.meta.scheme_category}
         </Typography>
         <Typography variant="body2" component="p">
@@ -62,7 +72,13 @@ const MutualFundCard = ({ data, changeFundUnits }: MutualFundCardProps) => {
           Scheme Code: {data.meta.scheme_code}
         </Typography>
       </CardContent>
-      <CardActions>
+      <CardActions
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+          paddingInline: "10rem",
+        }}
+      >
         <Button size="small" onClick={() => changeFundUnits("increase")}>
           Buy
         </Button>
@@ -78,10 +94,6 @@ export default function MutualFundCardWrapper({
   mutualFund,
   changeFundUnits,
 }: MutualFundCardWrapperProps) {
-  const handleButtonClick = () => {
-    // TODO ::
-  };
-
   const {
     data: fundDetails,
     isLoading,

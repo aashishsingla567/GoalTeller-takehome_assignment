@@ -1,11 +1,12 @@
-import { PropsWithChildren } from "react";
 import {
-  Dialog,
-  DialogTitle,
-  DialogContent,
-  DialogActions,
   Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
 } from "@mui/material";
+import { makeStyles } from "@mui/styles";
+import { PropsWithChildren } from "react";
 
 interface PopupProps extends PropsWithChildren {
   open: boolean;
@@ -13,9 +14,17 @@ interface PopupProps extends PropsWithChildren {
   title: string;
 }
 
+const useStyles = makeStyles({
+  paper: {
+    minWidth: 400,
+  },
+});
+
 export default function Popup({ open, onClose, title, children }: PopupProps) {
+  const classes = useStyles();
+
   return (
-    <Dialog open={open} onClose={onClose}>
+    <Dialog maxWidth={false} open={open} onClose={onClose}>
       <DialogActions>
         <Button onClick={onClose}>Close</Button>
       </DialogActions>
