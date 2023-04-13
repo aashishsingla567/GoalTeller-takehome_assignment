@@ -21,7 +21,7 @@ function MutualFundsDataGrid({ onMutualFundClick }: MutualFundsDataGridProps) {
       flex: 2.5,
       renderCell: (params) => {
         const fund = params.row as MutualFund;
-        
+
         return (
           <div
             style={{
@@ -40,6 +40,9 @@ function MutualFundsDataGrid({ onMutualFundClick }: MutualFundsDataGridProps) {
     {
       field: "unitsOwned",
       headerName: "Units Owned",
+      renderCell: (params) => {
+        return <>{unitsOwned[params.row.id]} units owned</>;
+      },
       type: "number",
       flex: 1,
     },

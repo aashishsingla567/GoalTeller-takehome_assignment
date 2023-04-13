@@ -37,6 +37,12 @@ const PortfolioContextProvider = ({
 
   const changeFundUnits = useCallback(
     (fundIndex: number) => (changetype: "increase" | "decrease") => {
+      console.log("Before", {
+        fundIndex,
+        units: unitsOwned[fundIndex],
+        fund: allFunds[fundIndex],
+      });
+
       switch (changetype) {
         case "increase":
           setUnitsOwned((oldUnits: number[]) => {
@@ -53,6 +59,12 @@ const PortfolioContextProvider = ({
           setTotalUnitsOwned((oldTotalUnits: number) => --oldTotalUnits);
           break;
       }
+
+      console.log("After", {
+        fundIndex,
+        units: unitsOwned[fundIndex],
+        fund: allFunds[fundIndex],
+      });
     },
     [unitsOwned]
   );
