@@ -60,7 +60,6 @@ const PortfolioPage: FC = () => {
     selectedFund: MutualFund,
     changeFundUnits: Function
   ) => {
-    debugger;
     await setSelectedFund(selectedFund);
     await setChangeSelectedFundUnits(() => changeFundUnits);
     handlePopupOpen();

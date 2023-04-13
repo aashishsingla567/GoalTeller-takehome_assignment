@@ -46,7 +46,7 @@ const PortfolioContextProvider = ({
         return oldUnits;
       });
     },
-    [setUnitsOwned]
+    [unitsOwned]
   );
 
   return (

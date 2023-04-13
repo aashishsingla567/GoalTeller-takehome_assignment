@@ -45,8 +45,9 @@ const MutualFundCard = ({ data, changeFundUnits }: MutualFundCardProps) => {
         accDate: new Date(acc.date),
         currDate: new Date(curr.date),
       };
-      return (accDate > currDate) ? acc : curr;
+      return accDate > currDate ? acc : curr;
     });
+    return latest;
   }, [data]);
 
   return (
@@ -71,6 +72,7 @@ const MutualFundCard = ({ data, changeFundUnits }: MutualFundCardProps) => {
         <Typography variant="body2" component="p">
           Scheme Code: {data.meta.scheme_code}
         </Typography>
+        <Typography>Nav : {latestData.nav}</Typography>
       </CardContent>
       <CardActions
         style={{
@@ -79,10 +81,18 @@ const MutualFundCard = ({ data, changeFundUnits }: MutualFundCardProps) => {
           paddingInline: "10rem",
         }}
       >
-        <Button size="small" variant="contained" onClick={() => changeFundUnits("increase")}>
+        <Button
+          size="small"
+          variant="contained"
+          onClick={() => changeFundUnits("increase")}
+        >
           Buy
         </Button>
-        <Button size="small" variant="outlined" onClick={() => changeFundUnits("decrease")}>
+        <Button
+          size="small"
+          variant="outlined"
+          onClick={() => changeFundUnits("decrease")}
+        >
           Sell
         </Button>
       </CardActions>
