@@ -16,6 +16,9 @@ export default function Header() {
       <AppBar
         style={{
           position: "static",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
         }}
         color="primary"
       >

@@ -95,10 +95,10 @@ const PortfolioPage: FC = () => {
             />
           </Popup>
         )}
+        <Typography variant="body2" fontSize={"2rem"} color="textPrimary" align="right" paddingY={"1rem"} paddingX={"1rem"}>
+          Total units owned = {totalUnitsOwned}
+        </Typography>
       </Box>
-      <Typography variant="body2" color="textSecondary" align="center">
-        Total units owned = {totalUnitsOwned}
-      </Typography>
     </>
   );
 };
