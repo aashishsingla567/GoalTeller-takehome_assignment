@@ -22,6 +22,8 @@ function MutualFundsDataGrid({ onMutualFundClick }: MutualFundsDataGridProps) {
       renderCell: (params) => {
         const fund = params.row as MutualFund;
 
+        console.log(params.row.id);
+
         return (
           <div
             style={{
@@ -29,12 +31,7 @@ function MutualFundsDataGrid({ onMutualFundClick }: MutualFundsDataGridProps) {
               width: "100%",
             }}
             onClick={() =>
-              onMutualFundClick(
-                fund,
-                changeFundUnits(
-                  params.api.getRowIndexRelativeToVisibleRows(params.row.id)
-                )
-              )
+              onMutualFundClick(fund, changeFundUnits(params.row.id))
             }
           >
             {fund.schemeName || "Name not found"}
@@ -64,7 +61,15 @@ function MutualFundsDataGrid({ onMutualFundClick }: MutualFundsDataGridProps) {
 
   return (
     <div style={{ height: 500, width: "100%" }}>
-      <DataGrid columns={columns} rows={rows || []} />
+      <DataGrid
+        initialState={{
+          sorting: {
+            sortModel: [{ field: "unitsOwned", sort: "desc" }],
+          },
+        }}
+        columns={columns}
+        rows={rows || []}
+      />
     </div>
   );
 }

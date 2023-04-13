@@ -26,7 +26,7 @@ interface MutualFundCardProps {
 const useStyles = makeStyles({
   card: {
     margin: "auto",
-    paddingBlock: "2rem",
+    // paddingBlock: "2rem",
   },
   title: {
     fontSize: 14,
@@ -52,9 +52,9 @@ const MutualFundCard = ({ data, changeFundUnits }: MutualFundCardProps) => {
   return (
     <Card className={classes.card}>
       <CardContent>
-        <Typography variant="h6" component="h2">
+        {/* <Typography variant="h6" component="h2">
           Scheme Name: {data.meta.scheme_name}
-        </Typography>
+        </Typography> */}
         <Typography className={classes.pos} color="textSecondary">
           Fund House: {data.meta.fund_house}
         </Typography>
@@ -75,14 +75,14 @@ const MutualFundCard = ({ data, changeFundUnits }: MutualFundCardProps) => {
       <CardActions
         style={{
           display: "flex",
-          justifyContent: "space-between",
+          justifyContent: "space-around",
           paddingInline: "10rem",
         }}
       >
-        <Button size="small" onClick={() => changeFundUnits("increase")}>
+        <Button size="small" variant="contained" onClick={() => changeFundUnits("increase")}>
           Buy
         </Button>
-        <Button size="small" onClick={() => changeFundUnits("decrease")}>
+        <Button size="small" variant="outlined" onClick={() => changeFundUnits("decrease")}>
           Sell
         </Button>
       </CardActions>

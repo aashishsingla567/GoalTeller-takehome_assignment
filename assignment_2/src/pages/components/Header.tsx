@@ -6,7 +6,7 @@ export default function Header() {
   };
 
   const Logo = (
-    <Typography variant="h6" component="h1">
+    <Typography variant="h6" component="h1" textAlign={"center"}>
       MF Store
     </Typography>
   );
@@ -17,6 +17,7 @@ export default function Header() {
         style={{
           position: "static",
         }}
+        color="primary"
       >
         {displayDesktop()}
       </AppBar>

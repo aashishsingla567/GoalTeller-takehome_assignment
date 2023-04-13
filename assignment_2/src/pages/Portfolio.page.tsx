@@ -27,7 +27,7 @@ const PortfolioPage: FC = () => {
     useContext(PortfolioContext);
 
   const [changeSelectedFundUnits, setChangeSelectedFundUnits] =
-    useState<Function>((changeType: "increase" | "decrease") => {});
+    useState<Function>(() => (changeType: "increase" | "decrease") => {});
 
   const {
     data: mutualFundsList,
@@ -44,6 +44,10 @@ const PortfolioPage: FC = () => {
     }
   }, [mutualFundsList]);
 
+  useEffect(() => {
+    console.log({ changeSelectedFundUnits });
+  }, [changeSelectedFundUnits]);
+
   const handlePopupOpen = () => {
     setPopupOpen(true);
   };
@@ -52,12 +56,13 @@ const PortfolioPage: FC = () => {
     setPopupOpen(false);
   };
 
-  const handleMutualFundSelected = (
+  const handleMutualFundSelected = async (
     selectedFund: MutualFund,
     changeFundUnits: Function
   ) => {
-    setSelectedFund(selectedFund);
-    setChangeSelectedFundUnits(changeFundUnits);
+    debugger;
+    await setSelectedFund(selectedFund);
+    await setChangeSelectedFundUnits(() => changeFundUnits);
     handlePopupOpen();
   };
 

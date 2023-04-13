@@ -75,8 +75,8 @@ function SearchResults({ onMutualFundClick }: SearchResultProps) {
   }
 
   return (
-    <Box>
-      <Typography>Search Results</Typography>
+    <Box marginY={"1rem"}>
+      <Typography variant="h5" pb={"1rem"}>Search Results</Typography>
       <TableContainer component={Paper}>
         <Table>
           <TableHead>
